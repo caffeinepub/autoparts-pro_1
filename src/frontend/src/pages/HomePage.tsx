@@ -28,36 +28,71 @@ const categories = [
     icon: Settings,
     gradient: "category-gradient-engine",
     count: "1,200+ Parts",
+    img: "/assets/generated/category-engine.dim_600x400.jpg",
   },
   {
     name: "BRAKE SYSTEMS",
     icon: Disc,
     gradient: "category-gradient-brake",
     count: "850+ Parts",
+    img: "/assets/generated/category-brake.dim_600x400.jpg",
   },
   {
     name: "ELECTRICAL PARTS",
     icon: Zap,
     gradient: "category-gradient-electrical",
     count: "600+ Parts",
+    img: "/assets/generated/category-electrical.dim_600x400.jpg",
   },
   {
     name: "SUSPENSION & STEERING",
     icon: Activity,
     gradient: "category-gradient-suspension",
     count: "740+ Parts",
+    img: "/assets/generated/category-suspension.dim_600x400.jpg",
   },
   {
     name: "ACCESSORIES & GEAR",
     icon: Layers,
     gradient: "category-gradient-accessories",
     count: "500+ Parts",
+    img: "/assets/generated/category-accessories.dim_600x400.jpg",
   },
   {
     name: "PERFORMANCE UPGRADES",
     icon: TrendingUp,
     gradient: "category-gradient-performance",
     count: "320+ Parts",
+    img: "/assets/generated/category-performance.dim_600x400.jpg",
+  },
+];
+
+const toyotaParts = [
+  { name: "Door", img: "/assets/generated/toyota-prado-door.dim_800x600.jpg" },
+  {
+    name: "Sunroof",
+    img: "/assets/generated/toyota-prado-sunroof.dim_800x600.jpg",
+  },
+  {
+    name: "Headlights",
+    img: "/assets/generated/toyota-prado-headlight.dim_800x600.jpg",
+  },
+  {
+    name: "Side Mirrors",
+    img: "/assets/generated/toyota-prado-side-mirror.dim_800x600.jpg",
+  },
+  {
+    name: "Dashboard",
+    img: "/assets/generated/toyota-prado-dashboard.dim_800x600.jpg",
+  },
+  { name: "LCD", img: "/assets/generated/toyota-prado-lcd.dim_800x600.jpg" },
+  {
+    name: "Bonnet",
+    img: "/assets/generated/toyota-prado-bonnet.dim_800x600.jpg",
+  },
+  {
+    name: "Side Panel",
+    img: "/assets/generated/toyota-prado-side-panel.dim_800x600.jpg",
   },
 ];
 
@@ -90,6 +125,7 @@ const categoryImages: Record<string, string> = {
   Electrical: "/assets/generated/category-electrical.dim_600x400.jpg",
   Suspension: "/assets/generated/category-suspension.dim_600x400.jpg",
   Accessories: "/assets/generated/category-accessories.dim_600x400.jpg",
+  "Toyota Parts": "/assets/generated/toyota-parts-collection.dim_800x500.jpg",
 };
 
 function StarRating({ rating }: { rating: number }) {
@@ -110,6 +146,10 @@ function StarRating({ rating }: { rating: number }) {
       </span>
     </div>
   );
+}
+
+function formatPKR(price: number): string {
+  return `PKR ${Math.round(price * 280).toLocaleString("en-PK")}`;
 }
 
 function ProductCard({ product, index }: { product: Product; index: number }) {
@@ -141,15 +181,15 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         </h3>
         <StarRating rating={product.rating} />
         <div className="flex items-center justify-between mt-3">
-          <span className="font-display font-black text-lg text-foreground">
-            ${product.price.toFixed(2)}
+          <span className="font-display font-black text-base text-foreground">
+            {formatPKR(product.price)}
           </span>
           <button
             type="button"
             data-ocid={`products.featured.add_to_cart.${index + 1}`}
             className="px-3 py-2 bg-secondary text-secondary-foreground font-display font-bold text-xs uppercase tracking-widest hover:bg-secondary/80 transition-colors rounded-sm"
           >
-            ADD TO CART
+            INQUIRE
           </button>
         </div>
       </div>
@@ -248,6 +288,34 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
+      {/* Official Parts Supplier Banner */}
+      <motion.section
+        data-ocid="toyota.supplier.section"
+        initial={{ opacity: 0, y: -10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="bg-foreground border-b-4 border-primary"
+      >
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+          {/* Left: label badge */}
+          <div className="flex items-center gap-3">
+            <span className="inline-block px-3 py-1 bg-primary text-primary-foreground font-display font-black text-[10px] uppercase tracking-[0.2em] rounded-sm shrink-0">
+              OFFICIAL PARTS SUPPLIER
+            </span>
+            <div className="hidden sm:block w-px h-8 bg-white/20" />
+            <h2 className="font-display font-black text-lg sm:text-xl uppercase tracking-tight text-white leading-none">
+              TOYOTA PRADO &amp; LAND CRUISER
+            </h2>
+          </div>
+          {/* Right: tagline */}
+          <p className="text-white/55 text-xs font-display uppercase tracking-widest text-center sm:text-right">
+            Genuine and aftermarket parts for Pakistan&apos;s most popular
+            premium SUVs
+          </p>
+        </div>
+      </motion.section>
+
       {/* Category Grid */}
       <section className="py-16 bg-muted">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
@@ -277,25 +345,249 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.06 }}
                   onClick={() => onNavigate("products")}
-                  className={`${cat.gradient} relative group p-6 rounded-sm text-left overflow-hidden hover:ring-2 hover:ring-primary transition-all`}
+                  className="relative group rounded-sm text-left overflow-hidden hover:ring-2 hover:ring-primary transition-all"
                 >
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-                  <div className="relative">
-                    <div className="w-10 h-10 rounded-sm bg-primary/20 border border-primary/40 flex items-center justify-center mb-4">
-                      <Icon className="w-5 h-5 text-primary" />
+                  {/* Background image */}
+                  <div className="h-44 sm:h-52 overflow-hidden">
+                    <img
+                      src={cat.img}
+                      alt={cat.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-400"
+                    />
+                  </div>
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent group-hover:from-black/70 transition-colors" />
+                  {/* Content */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <div className="w-8 h-8 rounded-sm bg-primary/20 border border-primary/40 flex items-center justify-center mb-2">
+                      <Icon className="w-4 h-4 text-primary" />
                     </div>
                     <h3 className="font-display font-black text-xs sm:text-sm uppercase tracking-[0.08em] text-white leading-snug mb-1">
                       {cat.name}
                     </h3>
-                    <p className="text-white/50 text-xs mb-4">{cat.count}</p>
-                    <span className="inline-flex items-center gap-1 text-primary font-display font-bold text-[11px] uppercase tracking-widest border border-primary/50 px-3 py-1.5 rounded-sm group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                      VIEW PRODUCTS <ArrowRight className="w-3 h-3" />
+                    <p className="text-white/60 text-xs mb-2">{cat.count}</p>
+                    <span className="inline-flex items-center gap-1 text-primary font-display font-bold text-[11px] uppercase tracking-widest border border-primary/50 px-2.5 py-1 rounded-sm group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                      VIEW <ArrowRight className="w-3 h-3" />
                     </span>
                   </div>
                 </motion.button>
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* Toyota Featured Cars Section */}
+      <section className="py-16 bg-background">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <p className="text-primary font-display font-bold text-xs uppercase tracking-[0.25em] mb-2">
+              OFFICIAL PARTS SUPPLIER
+            </p>
+            <h2 className="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-foreground mb-2">
+              TOYOTA PRADO & LAND CRUISER
+            </h2>
+            <p className="text-muted-foreground text-sm">
+              Genuine and aftermarket parts for Pakistan&apos;s most popular
+              premium SUVs
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              {
+                img: "/assets/generated/toyota-prado.dim_800x500.jpg",
+                title: "TOYOTA PRADO",
+                subtitle: "Premium SUV Parts Available",
+                ocid: "toyota.prado.card",
+                btnOcid: "toyota.prado.button",
+              },
+              {
+                img: "/assets/generated/toyota-land-cruiser.dim_800x500.jpg",
+                title: "TOYOTA LAND CRUISER",
+                subtitle: "Genuine Parts In Stock",
+                ocid: "toyota.land_cruiser.card",
+                btnOcid: "toyota.land_cruiser.button",
+              },
+            ].map((car, i) => (
+              <motion.div
+                key={car.title}
+                data-ocid={car.ocid}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 }}
+                className="relative group rounded-sm overflow-hidden bg-secondary cursor-pointer"
+                onClick={() => onNavigate("products")}
+              >
+                <div className="h-64 sm:h-72 overflow-hidden">
+                  <img
+                    src={car.img}
+                    alt={car.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="font-display font-black text-xl sm:text-2xl uppercase tracking-tight text-white mb-1">
+                    {car.title}
+                  </h3>
+                  <p className="text-white/70 text-sm mb-4">{car.subtitle}</p>
+                  <button
+                    type="button"
+                    data-ocid={car.btnOcid}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onNavigate("products");
+                    }}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-display font-black text-xs uppercase tracking-widest hover:bg-primary/90 transition-colors rounded-sm"
+                  >
+                    SHOP PARTS <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Toyota Parts Image Grid */}
+      <section className="py-16 bg-muted">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <p className="text-primary font-display font-bold text-xs uppercase tracking-[0.25em] mb-2">
+              AVAILABLE NOW
+            </p>
+            <h2 className="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-foreground mb-2">
+              TOYOTA PARTS AVAILABLE
+            </h2>
+            <p className="text-muted-foreground text-sm">
+              All parts available for Toyota Prado & Land Cruiser
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {toyotaParts.map((part, i) => (
+              <motion.div
+                key={part.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.07 }}
+                className="group relative rounded-sm overflow-hidden cursor-pointer"
+                onClick={() => onNavigate("products")}
+              >
+                <div className="h-40 sm:h-44 overflow-hidden">
+                  <img
+                    src={part.img}
+                    alt={part.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-3">
+                  <p className="font-display font-black text-xs uppercase tracking-widest text-white">
+                    {part.name}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <button
+              type="button"
+              onClick={() => onNavigate("products")}
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-secondary text-white font-display font-black text-sm uppercase tracking-widest hover:bg-secondary/80 transition-colors rounded-sm"
+            >
+              VIEW ALL TOYOTA PARTS <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Toyota Parts Banner Section */}
+      <section className="py-16 bg-secondary">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <h2 className="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-white mb-2">
+              TOYOTA GENUINE PARTS
+            </h2>
+            <p className="text-white/60 text-sm">
+              Direct fitment. Trusted quality. Lahore&apos;s #1 Toyota parts
+              supplier.
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="relative rounded-sm overflow-hidden"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              {/* Image */}
+              <div className="h-64 lg:h-auto min-h-[300px] overflow-hidden">
+                <img
+                  src="/assets/generated/toyota-parts-collection.dim_800x500.jpg"
+                  alt="Toyota Genuine Parts Collection"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Text */}
+              <div className="bg-foreground flex flex-col justify-center p-8 sm:p-12">
+                <p className="text-primary font-display font-bold text-xs uppercase tracking-[0.25em] mb-3">
+                  QUALITY ASSURED
+                </p>
+                <h3 className="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-white leading-tight mb-4">
+                  QUALITY PARTS FOR YOUR TOYOTA
+                </h3>
+                <p className="text-white/60 text-sm leading-relaxed mb-7">
+                  Genuine OEM and aftermarket parts for Toyota Prado and Land
+                  Cruiser. Doors, sunroofs, headlights, side mirrors,
+                  dashboards, LCD, bonnet, side panels and more.
+                </p>
+                <div className="flex flex-wrap gap-3 mb-6">
+                  {[
+                    "Doors",
+                    "Sunroof",
+                    "Headlights",
+                    "Side Mirrors",
+                    "Dashboard",
+                    "LCD",
+                    "Bonnet",
+                    "Side Panels",
+                  ].map((part) => (
+                    <span
+                      key={part}
+                      className="text-[11px] font-display font-bold uppercase tracking-widest text-primary border border-primary/40 px-2.5 py-1 rounded-sm"
+                    >
+                      {part}
+                    </span>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  data-ocid="toyota.parts.view_button"
+                  onClick={() => onNavigate("products")}
+                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-display font-black text-sm uppercase tracking-widest hover:bg-primary/90 transition-colors rounded-sm self-start"
+                >
+                  VIEW TOYOTA PARTS <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
