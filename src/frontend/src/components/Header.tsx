@@ -38,25 +38,25 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
     <header className="sticky top-0 z-50 w-full">
       {/* Top bar */}
       <div className="bg-secondary text-secondary-foreground">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
-          {/* Logo */}
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
+          {/* Logo + Business Name */}
           <button
             type="button"
             data-ocid="nav.home.link"
             onClick={() => handleNav("home")}
-            className="flex items-center gap-2 group"
+            className="flex items-center gap-3 group"
           >
-            <div className="w-8 h-8 bg-primary rounded-sm flex items-center justify-center flex-shrink-0">
-              <span className="text-primary-foreground font-display font-black text-xs">
-                AK
+            <img
+              src="/assets/uploads/logo-019d3768-b9d1-7450-8589-48a0983820bb-1.jpg"
+              alt="AL KAHN AUTO & IMPORTS"
+              className="h-12 w-auto object-contain rounded-sm"
+            />
+            <div className="flex flex-col leading-tight">
+              <span className="text-primary font-display font-extrabold text-base sm:text-lg tracking-wider uppercase">
+                AL KAHN AUTO
               </span>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="font-display font-black text-white text-base tracking-widest uppercase">
-                AL KHAN
-              </span>
-              <span className="font-display font-medium text-[10px] tracking-[0.2em] text-primary uppercase">
-                AUTO & IMPORTS
+              <span className="text-white/70 font-display font-semibold text-xs tracking-[0.18em] uppercase">
+                &amp; IMPORTS
               </span>
             </div>
           </button>

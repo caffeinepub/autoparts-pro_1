@@ -4,6 +4,8 @@ import { useState } from "react";
 import type { Product } from "../backend.d";
 import { useProductsByCategory } from "../hooks/useQueries";
 
+const PKR_RATE = 278;
+
 const categories = [
   "All",
   "Engine",
@@ -163,7 +165,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         <StarRating rating={product.rating} />
         <div className="flex items-center justify-between mt-3 pt-3 border-t border-border">
           <span className="font-display font-black text-lg text-foreground">
-            ${product.price.toFixed(2)}
+            PKR {Math.round(product.price * PKR_RATE).toLocaleString()}
           </span>
           <button
             type="button"
@@ -181,8 +183,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
 function ToyotaPartCard({ part, index }: { part: ToyotaPart; index: number }) {
   const whatsappNumber = "923071111234";
+  const pkrPrice = Math.round(part.price * PKR_RATE).toLocaleString();
   const message = encodeURIComponent(
-    `Hi! I'm interested in the ${part.name} for Toyota Prado / Land Cruiser. Price: $${part.price}. Please share availability.`,
+    `Hi! I'm interested in the ${part.name} for Toyota Prado / Land Cruiser. Price: PKR ${pkrPrice}. Please share availability.`,
   );
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
 
@@ -217,7 +220,7 @@ function ToyotaPartCard({ part, index }: { part: ToyotaPart; index: number }) {
         <StarRating rating={part.rating} />
         <div className="flex items-center justify-between mt-3 pt-3 border-t border-border">
           <span className="font-display font-black text-lg text-foreground">
-            ${part.price.toFixed(2)}
+            PKR {pkrPrice}
           </span>
           <a
             href={whatsappUrl}
