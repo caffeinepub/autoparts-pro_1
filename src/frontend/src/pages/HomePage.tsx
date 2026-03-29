@@ -1,16 +1,11 @@
 import {
-  Activity,
   ArrowRight,
-  Disc,
   Headphones,
-  Layers,
   Package,
-  Settings,
   Shield,
   Star,
   TrendingUp,
   Truck,
-  Zap,
 } from "lucide-react";
 import { motion } from "motion/react";
 import type { BlogPost, Product } from "../backend.d";
@@ -21,51 +16,6 @@ type Page = "home" | "about" | "products" | "services" | "blog" | "contact";
 interface HomePageProps {
   onNavigate: (page: Page) => void;
 }
-
-const categories = [
-  {
-    name: "ENGINE COMPONENTS",
-    icon: Settings,
-    gradient: "category-gradient-engine",
-    count: "1,200+ Parts",
-    img: "/assets/generated/category-engine.dim_600x400.jpg",
-  },
-  {
-    name: "BRAKE SYSTEMS",
-    icon: Disc,
-    gradient: "category-gradient-brake",
-    count: "850+ Parts",
-    img: "/assets/generated/category-brake.dim_600x400.jpg",
-  },
-  {
-    name: "ELECTRICAL PARTS",
-    icon: Zap,
-    gradient: "category-gradient-electrical",
-    count: "600+ Parts",
-    img: "/assets/generated/category-electrical.dim_600x400.jpg",
-  },
-  {
-    name: "SUSPENSION & STEERING",
-    icon: Activity,
-    gradient: "category-gradient-suspension",
-    count: "740+ Parts",
-    img: "/assets/generated/category-suspension.dim_600x400.jpg",
-  },
-  {
-    name: "ACCESSORIES & GEAR",
-    icon: Layers,
-    gradient: "category-gradient-accessories",
-    count: "500+ Parts",
-    img: "/assets/generated/category-accessories.dim_600x400.jpg",
-  },
-  {
-    name: "PERFORMANCE UPGRADES",
-    icon: TrendingUp,
-    gradient: "category-gradient-performance",
-    count: "320+ Parts",
-    img: "/assets/generated/category-performance.dim_600x400.jpg",
-  },
-];
 
 const toyotaParts = [
   { name: "Door", img: "/assets/generated/toyota-prado-door.dim_800x600.jpg" },
@@ -285,95 +235,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               </button>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Official Parts Supplier Banner */}
-      <motion.section
-        data-ocid="toyota.supplier.section"
-        initial={{ opacity: 0, y: -10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="bg-foreground border-b-4 border-primary"
-      >
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          {/* Left: label badge */}
-          <div className="flex items-center gap-3">
-            <span className="inline-block px-3 py-1 bg-primary text-primary-foreground font-display font-black text-[10px] uppercase tracking-[0.2em] rounded-sm shrink-0">
-              OFFICIAL PARTS SUPPLIER
-            </span>
-            <div className="hidden sm:block w-px h-8 bg-white/20" />
-            <h2 className="font-display font-black text-lg sm:text-xl uppercase tracking-tight text-white leading-none">
-              TOYOTA PRADO &amp; LAND CRUISER
-            </h2>
-          </div>
-          {/* Right: tagline */}
-          <p className="text-white/55 text-xs font-display uppercase tracking-widest text-center sm:text-right">
-            Genuine and aftermarket parts for Pakistan&apos;s most popular
-            premium SUVs
-          </p>
-        </div>
-      </motion.section>
-
-      {/* Category Grid */}
-      <section className="py-16 bg-muted">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-10"
-          >
-            <h2 className="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-foreground mb-2">
-              SHOP BY CATEGORY
-            </h2>
-            <p className="text-muted-foreground text-sm">
-              Find exactly what your vehicle needs
-            </p>
-          </motion.div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {categories.map((cat, i) => {
-              const Icon = cat.icon;
-              return (
-                <motion.button
-                  key={cat.name}
-                  type="button"
-                  data-ocid={`categories.item.${i + 1}`}
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06 }}
-                  onClick={() => onNavigate("products")}
-                  className="relative group rounded-sm text-left overflow-hidden hover:ring-2 hover:ring-primary transition-all"
-                >
-                  {/* Background image */}
-                  <div className="h-44 sm:h-52 overflow-hidden">
-                    <img
-                      src={cat.img}
-                      alt={cat.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-400"
-                    />
-                  </div>
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent group-hover:from-black/70 transition-colors" />
-                  {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <div className="w-8 h-8 rounded-sm bg-primary/20 border border-primary/40 flex items-center justify-center mb-2">
-                      <Icon className="w-4 h-4 text-primary" />
-                    </div>
-                    <h3 className="font-display font-black text-xs sm:text-sm uppercase tracking-[0.08em] text-white leading-snug mb-1">
-                      {cat.name}
-                    </h3>
-                    <p className="text-white/60 text-xs mb-2">{cat.count}</p>
-                    <span className="inline-flex items-center gap-1 text-primary font-display font-bold text-[11px] uppercase tracking-widest border border-primary/50 px-2.5 py-1 rounded-sm group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                      VIEW <ArrowRight className="w-3 h-3" />
-                    </span>
-                  </div>
-                </motion.button>
-              );
-            })}
-          </div>
         </div>
       </section>
 
@@ -642,7 +503,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               WHY CHOOSE AL KHAN
             </h2>
             <p className="text-muted-foreground text-sm">
-              The Al Khan advantage — built for drivers who demand the best
+              The Al Khan advantage -- built for drivers who demand the best
             </p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
