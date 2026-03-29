@@ -1,4 +1,11 @@
-import { ChevronDown, Menu, Phone, Search, X } from "lucide-react";
+import {
+  ChevronDown,
+  Menu,
+  MessageCircle,
+  Phone,
+  Search,
+  X,
+} from "lucide-react";
 import { useState } from "react";
 
 type Page = "home" | "about" | "products" | "services" | "blog" | "contact";
@@ -40,16 +47,16 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             className="flex items-center gap-2 group"
           >
             <div className="w-8 h-8 bg-primary rounded-sm flex items-center justify-center flex-shrink-0">
-              <span className="text-primary-foreground font-display font-black text-sm">
-                A
+              <span className="text-primary-foreground font-display font-black text-xs">
+                AK
               </span>
             </div>
             <div className="flex flex-col leading-none">
               <span className="font-display font-black text-white text-base tracking-widest uppercase">
-                APEX
+                AL KHAN
               </span>
               <span className="font-display font-medium text-[10px] tracking-[0.2em] text-primary uppercase">
-                AUTO PARTS
+                AUTO & IMPORTS
               </span>
             </div>
           </button>
@@ -94,13 +101,24 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
             {/* Phone */}
             <a
-              href="tel:+18005551234"
+              href="tel:+923071111234"
               className="hidden md:flex items-center gap-1.5 text-white/80 hover:text-primary transition-colors text-sm"
             >
               <Phone className="w-4 h-4" />
               <span className="font-display font-semibold tracking-wide">
-                1-800-555-1234
+                +92 307-111-1234
               </span>
+            </a>
+
+            {/* WhatsApp */}
+            <a
+              href="https://wa.me/923071111234"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="hidden md:flex items-center gap-1.5 text-white/80 hover:text-primary transition-colors text-sm"
+            >
+              <MessageCircle className="w-4 h-4" />
             </a>
 
             {/* Mobile toggle */}

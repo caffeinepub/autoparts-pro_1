@@ -84,6 +84,14 @@ const whyChoose = [
   },
 ];
 
+const categoryImages: Record<string, string> = {
+  Engine: "/assets/generated/category-engine.dim_600x400.jpg",
+  Brake: "/assets/generated/category-brake.dim_600x400.jpg",
+  Electrical: "/assets/generated/category-electrical.dim_600x400.jpg",
+  Suspension: "/assets/generated/category-suspension.dim_600x400.jpg",
+  Accessories: "/assets/generated/category-accessories.dim_600x400.jpg",
+};
+
 function StarRating({ rating }: { rating: number }) {
   return (
     <div className="flex items-center gap-0.5">
@@ -105,12 +113,9 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 function ProductCard({ product, index }: { product: Product; index: number }) {
-  const gradients = [
-    "from-blue-900 to-blue-800",
-    "from-red-900 to-red-800",
-    "from-green-900 to-green-800",
-    "from-yellow-900 to-amber-800",
-  ];
+  const imgSrc =
+    categoryImages[product.category] ??
+    "/assets/generated/category-engine.dim_600x400.jpg";
   return (
     <motion.div
       data-ocid={`products.featured.item.${index + 1}`}
@@ -120,10 +125,12 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       transition={{ delay: index * 0.1 }}
       className="bg-white border border-border rounded-sm overflow-hidden group hover:shadow-card transition-shadow"
     >
-      <div
-        className={`h-48 bg-gradient-to-br ${gradients[index % gradients.length]} flex items-center justify-center`}
-      >
-        <Settings className="w-16 h-16 text-white/30" />
+      <div className="h-48 overflow-hidden">
+        <img
+          src={imgSrc}
+          alt={product.category}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
       </div>
       <div className="p-4">
         <span className="text-xs font-display font-bold uppercase tracking-widest text-primary mb-1 block">
@@ -340,10 +347,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             className="text-center mb-10"
           >
             <h2 className="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-foreground mb-2">
-              WHY CHOOSE APEX
+              WHY CHOOSE AL KHAN
             </h2>
             <p className="text-muted-foreground text-sm">
-              The Apex advantage — built for drivers who demand the best
+              The Al Khan advantage — built for drivers who demand the best
             </p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

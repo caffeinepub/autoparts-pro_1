@@ -1,4 +1,12 @@
-import { CheckCircle, Clock, Loader2, Mail, MapPin, Phone } from "lucide-react";
+import {
+  CheckCircle,
+  Clock,
+  Loader2,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -74,9 +82,7 @@ export default function ContactPage() {
                         ADDRESS
                       </p>
                       <p className="text-muted-foreground text-sm">
-                        4821 Industrial Drive
-                        <br />
-                        Detroit, MI 48201
+                        Lahore, Punjab, Pakistan
                       </p>
                     </div>
                   </div>
@@ -89,10 +95,10 @@ export default function ContactPage() {
                         PHONE
                       </p>
                       <a
-                        href="tel:+18005551234"
+                        href="tel:+923071111234"
                         className="text-muted-foreground text-sm hover:text-primary transition-colors"
                       >
-                        1-800-555-1234
+                        +92 307-111-1234
                       </a>
                     </div>
                   </div>
@@ -105,10 +111,28 @@ export default function ContactPage() {
                         EMAIL
                       </p>
                       <a
-                        href="mailto:info@apexautoparts.com"
+                        href="mailto:alkhan.auto1122@gmail.com"
                         className="text-muted-foreground text-sm hover:text-primary transition-colors"
                       >
-                        info@apexautoparts.com
+                        alkhan.auto1122@gmail.com
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 bg-secondary rounded-sm flex items-center justify-center flex-shrink-0">
+                      <MessageCircle className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="font-display font-bold text-xs uppercase tracking-widest text-foreground mb-0.5">
+                        WHATSAPP
+                      </p>
+                      <a
+                        href="https://wa.me/923071111234"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground text-sm hover:text-primary transition-colors"
+                      >
+                        +92 307-111-1234
                       </a>
                     </div>
                   </div>
@@ -136,9 +160,9 @@ export default function ContactPage() {
               <div className="h-52 bg-secondary rounded-sm flex flex-col items-center justify-center text-center p-4">
                 <MapPin className="w-8 h-8 text-primary mb-2" />
                 <p className="text-white/60 text-xs font-display uppercase tracking-widest">
-                  4821 Industrial Drive
+                  Lahore, Punjab
                 </p>
-                <p className="text-white/40 text-xs">Detroit, MI 48201</p>
+                <p className="text-white/40 text-xs">Pakistan</p>
               </div>
             </motion.aside>
 

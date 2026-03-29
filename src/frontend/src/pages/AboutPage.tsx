@@ -69,7 +69,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
           >
             <p className="text-primary font-display font-bold text-xs uppercase tracking-[0.25em] mb-3">
-              ABOUT APEX AUTO PARTS
+              ABOUT AL KHAN AUTO & IMPORTS
             </p>
             <h1 className="font-display font-black text-3xl sm:text-4xl uppercase tracking-tight text-white">
               BUILT BY CAR PEOPLE,
@@ -94,17 +94,17 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Apex Auto Parts was founded in 2009 in Detroit, Michigan—the
-                  heart of American automotive manufacturing. What started as a
-                  small warehouse operation with a handful of domestic part
-                  lines has grown into one of the most trusted independent auto
-                  parts retailers in the country.
+                  Al Khan Auto & Imports was founded in 2009 in Detroit,
+                  Michigan—the heart of American automotive manufacturing. What
+                  started as a small warehouse operation with a handful of
+                  domestic part lines has grown into one of the most trusted
+                  independent auto parts retailers in the country.
                 </p>
                 <p>
                   Our founder, Michael Torres, spent two decades inside the OEM
                   supply chain and saw firsthand how drivers were being
                   overcharged for parts that should be accessible and
-                  affordable. He built Apex to fix that.
+                  affordable. He built Al Khan to fix that.
                 </p>
                 <p>
                   Today we stock over 200,000 SKUs spanning domestic and import

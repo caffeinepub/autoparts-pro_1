@@ -3,6 +3,7 @@ import {
   Instagram,
   Mail,
   MapPin,
+  MessageCircle,
   Phone,
   Twitter,
   Youtube,
@@ -26,7 +27,7 @@ export default function Footer({ onNavigate }: FooterProps) {
     if (!email.trim()) return;
     subscribe(email, {
       onSuccess: () => {
-        toast.success("You're subscribed! Welcome to the Apex family.");
+        toast.success("You're subscribed! Welcome to the Al Khan family.");
         setEmail("");
       },
       onError: () => toast.error("Subscription failed. Please try again."),
@@ -41,16 +42,16 @@ export default function Footer({ onNavigate }: FooterProps) {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-primary rounded-sm flex items-center justify-center">
-                <span className="text-primary-foreground font-display font-black text-sm">
-                  A
+                <span className="text-primary-foreground font-display font-black text-xs">
+                  AK
                 </span>
               </div>
               <div className="flex flex-col leading-none">
                 <span className="font-display font-black text-white text-base tracking-widest uppercase">
-                  APEX
+                  AL KHAN
                 </span>
                 <span className="font-display font-medium text-[10px] tracking-[0.2em] text-primary uppercase">
-                  AUTO PARTS
+                  AUTO & IMPORTS
                 </span>
               </div>
             </div>
@@ -96,6 +97,15 @@ export default function Footer({ onNavigate }: FooterProps) {
               >
                 <Youtube className="w-4 h-4" />
               </a>
+              <a
+                href="https://wa.me/923071111234"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="w-8 h-8 rounded-sm bg-white/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-colors"
+              >
+                <MessageCircle className="w-4 h-4" />
+              </a>
             </div>
           </div>
 
@@ -137,28 +147,35 @@ export default function Footer({ onNavigate }: FooterProps) {
             <ul className="space-y-3">
               <li className="flex items-start gap-2.5 text-white/60 text-sm">
                 <MapPin className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                <span>
-                  4821 Industrial Drive
-                  <br />
-                  Detroit, MI 48201
-                </span>
+                <span>Lahore, Punjab, Pakistan</span>
               </li>
               <li className="flex items-center gap-2.5 text-white/60 text-sm">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
                 <a
-                  href="tel:+18005551234"
+                  href="tel:+923071111234"
                   className="hover:text-primary transition-colors"
                 >
-                  1-800-555-1234
+                  +92 307-111-1234
                 </a>
               </li>
               <li className="flex items-center gap-2.5 text-white/60 text-sm">
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" />
                 <a
-                  href="mailto:info@apexautoparts.com"
+                  href="mailto:alkhan.auto1122@gmail.com"
                   className="hover:text-primary transition-colors"
                 >
-                  info@apexautoparts.com
+                  alkhan.auto1122@gmail.com
+                </a>
+              </li>
+              <li className="flex items-center gap-2.5 text-white/60 text-sm">
+                <MessageCircle className="w-4 h-4 text-primary flex-shrink-0" />
+                <a
+                  href="https://wa.me/923071111234"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors"
+                >
+                  WhatsApp Us
                 </a>
               </li>
             </ul>
@@ -204,7 +221,7 @@ export default function Footer({ onNavigate }: FooterProps) {
         {/* Bottom bar */}
         <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-white/40 text-xs">
-            &copy; {new Date().getFullYear()} Apex Auto Parts. All rights
+            &copy; {new Date().getFullYear()} Al Khan Auto & Imports. All rights
             reserved.
           </p>
           <p className="text-white/40 text-xs">

@@ -1,4 +1,4 @@
-import { Settings, ShoppingCart, Star } from "lucide-react";
+import { MessageCircle, Settings, ShoppingCart, Star } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import type { Product } from "../backend.d";
@@ -11,15 +11,91 @@ const categories = [
   "Electrical",
   "Suspension",
   "Accessories",
+  "Toyota Parts",
 ];
 
-const categoryColors: Record<string, string> = {
-  Engine: "bg-blue-900",
-  Brake: "bg-red-900",
-  Electrical: "bg-green-900",
-  Suspension: "bg-amber-900",
-  Accessories: "bg-purple-900",
+const categoryImages: Record<string, string> = {
+  Engine: "/assets/generated/category-engine.dim_600x400.jpg",
+  Brake: "/assets/generated/category-brake.dim_600x400.jpg",
+  Electrical: "/assets/generated/category-electrical.dim_600x400.jpg",
+  Suspension: "/assets/generated/category-suspension.dim_600x400.jpg",
+  Accessories: "/assets/generated/category-accessories.dim_600x400.jpg",
 };
+
+interface ToyotaPart {
+  name: string;
+  image: string;
+  description: string;
+  price: number;
+  rating: number;
+}
+
+const toyotaParts: ToyotaPart[] = [
+  {
+    name: "Door",
+    image: "/assets/generated/toyota-prado-door.dim_800x600.jpg",
+    description:
+      "OEM replacement door panel for Toyota Prado / Land Cruiser. Perfect fit with factory finish.",
+    price: 450,
+    rating: 4.7,
+  },
+  {
+    name: "Roof / Sunroof",
+    image: "/assets/generated/toyota-prado-sunroof.dim_800x600.jpg",
+    description:
+      "Panoramic sunroof glass assembly for Toyota Prado / Land Cruiser. Includes frame and seals.",
+    price: 650,
+    rating: 4.5,
+  },
+  {
+    name: "Headlights",
+    image: "/assets/generated/toyota-prado-headlight.dim_800x600.jpg",
+    description:
+      "LED headlamp assembly with chrome housing for Toyota Prado / Land Cruiser. Direct bolt-on.",
+    price: 380,
+    rating: 4.8,
+  },
+  {
+    name: "Side Mirrors",
+    image: "/assets/generated/toyota-prado-side-mirror.dim_800x600.jpg",
+    description:
+      "Power-foldable side mirror with turn signal for Toyota Prado / Land Cruiser. OEM quality.",
+    price: 120,
+    rating: 4.6,
+  },
+  {
+    name: "Dashboard",
+    image: "/assets/generated/toyota-prado-dashboard.dim_800x600.jpg",
+    description:
+      "Complete dashboard instrument panel for Toyota Prado / Land Cruiser. Premium leather trim finish.",
+    price: 890,
+    rating: 4.9,
+  },
+  {
+    name: "LCD Screen",
+    image: "/assets/generated/toyota-prado-lcd.dim_800x600.jpg",
+    description:
+      "Infotainment touchscreen LCD unit for Toyota Prado / Land Cruiser. Plug-and-play replacement.",
+    price: 540,
+    rating: 4.7,
+  },
+  {
+    name: "Bonnet / Hood",
+    image: "/assets/generated/toyota-prado-bonnet.dim_800x600.jpg",
+    description:
+      "OEM bonnet hood panel for Toyota Prado / Land Cruiser. Metallic silver factory finish.",
+    price: 320,
+    rating: 4.5,
+  },
+  {
+    name: "Side Panel",
+    image: "/assets/generated/toyota-prado-side-panel.dim_800x600.jpg",
+    description:
+      "Body side panel for Toyota Prado / Land Cruiser. Precision-cut for exact OEM replacement.",
+    price: 280,
+    rating: 4.6,
+  },
+];
 
 const skeletonKeys = [
   "sk-1",
@@ -49,7 +125,9 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 function ProductCard({ product, index }: { product: Product; index: number }) {
-  const bg = categoryColors[product.category] ?? "bg-gray-800";
+  const imgSrc =
+    categoryImages[product.category] ??
+    "/assets/generated/category-engine.dim_600x400.jpg";
   return (
     <motion.div
       data-ocid={`products.item.${index + 1}`}
@@ -58,8 +136,12 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       transition={{ delay: index * 0.04 }}
       className="bg-white border border-border rounded-sm overflow-hidden group hover:shadow-card transition-shadow"
     >
-      <div className={`h-44 ${bg} flex items-center justify-center`}>
-        <Settings className="w-14 h-14 text-white/25" />
+      <div className="h-44 overflow-hidden">
+        <img
+          src={imgSrc}
+          alt={product.category}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
       </div>
       <div className="p-4">
         <div className="flex items-center justify-between mb-1.5">
@@ -97,10 +179,68 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
   );
 }
 
+function ToyotaPartCard({ part, index }: { part: ToyotaPart; index: number }) {
+  const whatsappNumber = "923071111234";
+  const message = encodeURIComponent(
+    `Hi! I'm interested in the ${part.name} for Toyota Prado / Land Cruiser. Price: $${part.price}. Please share availability.`,
+  );
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+  return (
+    <motion.div
+      data-ocid={`toyota.item.${index + 1}`}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.04 }}
+      className="bg-white border border-border rounded-sm overflow-hidden group hover:shadow-card transition-shadow"
+    >
+      <div className="h-44 overflow-hidden relative">
+        <img
+          src={part.image}
+          alt={part.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+        <span className="absolute top-2 left-2 text-[10px] font-display font-bold uppercase tracking-widest text-white bg-primary px-2 py-0.5 rounded-sm">
+          TOYOTA
+        </span>
+      </div>
+      <div className="p-4">
+        <p className="text-[10px] font-display font-bold uppercase tracking-widest text-muted-foreground mb-1">
+          Toyota Prado / Land Cruiser
+        </p>
+        <h3 className="font-display font-bold text-sm uppercase tracking-wide text-foreground mb-2 leading-snug">
+          {part.name}
+        </h3>
+        <p className="text-muted-foreground text-xs leading-relaxed mb-3 line-clamp-2">
+          {part.description}
+        </p>
+        <StarRating rating={part.rating} />
+        <div className="flex items-center justify-between mt-3 pt-3 border-t border-border">
+          <span className="font-display font-black text-lg text-foreground">
+            ${part.price.toFixed(2)}
+          </span>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-ocid={`toyota.inquire.${index + 1}`}
+            className="flex items-center gap-1.5 px-3 py-2 bg-green-600 text-white font-display font-bold text-[11px] uppercase tracking-widest hover:bg-green-700 transition-colors rounded-sm"
+          >
+            <MessageCircle className="w-3 h-3" />
+            INQUIRE
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
-  const { data: products = [], isLoading } =
-    useProductsByCategory(activeCategory);
+  const isToyotaTab = activeCategory === "Toyota Parts";
+  const { data: products = [], isLoading } = useProductsByCategory(
+    isToyotaTab ? "All" : activeCategory,
+  );
 
   return (
     <main className="min-h-screen">
@@ -150,7 +290,23 @@ export default function ProductsPage() {
       {/* Products Grid */}
       <section className="py-10 bg-muted">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          {isLoading ? (
+          {isToyotaTab ? (
+            <>
+              <div className="mb-6">
+                <p className="text-primary font-display font-bold text-xs uppercase tracking-[0.2em] mb-1">
+                  GENUINE & OEM PARTS
+                </p>
+                <h2 className="font-display font-black text-xl uppercase tracking-tight text-foreground">
+                  Toyota Prado / Land Cruiser Parts
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                {toyotaParts.map((part, i) => (
+                  <ToyotaPartCard key={part.name} part={part} index={i} />
+                ))}
+              </div>
+            </>
+          ) : isLoading ? (
             <div
               data-ocid="products.loading_state"
               className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
